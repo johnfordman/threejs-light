@@ -114,7 +114,7 @@ export default class App {
     }
 
     render() {
-        var time = performance.now() * 0.005;
+        var time = performance.now() * 0.0005;
 
         this.stats.update();
      //   this.sphere.rotation.x = time 
@@ -125,11 +125,14 @@ export default class App {
         this.camera.position.y =  this.cameraPosition_mouse.y * this.cameraEasing_mouse * -1
         this.sphere.rotation.y = this.cameraPosition_mouse.x * this.cameraEasing_mouse* -1
         this.sphere.rotation.x = this.cameraPosition_mouse.y * this.cameraEasing_mouse
-       // for ( var i = 0; i < this.lightArr.length; i ++ )   {
-            var randomSpeed = utils.map(Math.random(), 0, 1, .2,.4);
-            this.lightArr[1].position.x =  Math.sin( randomSpeed ) ;
-            this.lightArr[1].position.z =  Math.cos( randomSpeed );
-        //}
+        for ( var i = 0; i < this.lightArr.length; i ++ )   {
+            var randomSpeed = Math.round(utils.map(Math.random(), 0, 1, 3.0,7.0 ));
+            var light = this.lightArr[ i ];
+                    var x = Math.sin( time + i * 7.0 ) * 10;
+                    var y = Math.cos( time + i * 5.0 ) * 10;
+                    var z = Math.cos( time + i * 6.0 ) * 10;
+                    light.position.set( x, y, z );
+        }
       //  var d =7;
         // this.light1.position.x = Math.sin( time * 0.3 ) * d;
         // this.light1.position.y = Math.cos( time * 0.3 ) * d
